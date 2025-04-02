@@ -1,0 +1,10 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "api/*.js", "use": "@vercel/node" }
+    ],
+    "env": {
+      "EMAIL_USER": "chisomsomtochiokaro@gmail.com",
+      "EMAIL_PASSWORD": "bcnb ekvm inyx xzna"
+    }
+  }

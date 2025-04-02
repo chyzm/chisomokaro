@@ -113,24 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         duration: 1
     });
 
-    // Form submission
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            
-            // Here you would typically send the data to a server
-            console.log('Form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
-    }
+    
 });
 
 
@@ -156,3 +139,66 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+
+
+      // form submission
+
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const form = e.target;
+  
+  // Client-side validation
+  if (!form.checkValidity()) {
+    form.classList.add('was-validated');
+    return;
+  }
+
+  const submitBtn = document.getElementById('submitBtn');
+  const submitText = document.getElementById('submitText');
+  const submitSpinner = document.getElementById('submitSpinner');
+  const alertBox = document.getElementById('formAlert');
+  
+  // UI updates
+  submitBtn.disabled = true;
+  submitText.textContent = 'Sending...';
+  submitSpinner.classList.remove('d-none');
+  alertBox.innerHTML = '';
+
+  try {
+    const formData = new FormData(form);
+    const response = await fetch('/api/sendmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(formData))
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alertBox.innerHTML = `
+        <div class="alert alert-success alert-dismissible fade show">
+          Message sent successfully!
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+      form.reset();
+      form.classList.remove('was-validated');
+    } else {
+      alertBox.innerHTML = `
+        <div class="alert alert-danger">
+          ${data.error || 'Failed to send message'}
+        </div>
+      `;
+    }
+  } catch (error) {
+    alertBox.innerHTML = `
+      <div class="alert alert-danger">
+        Network error. Please try again later.
+      </div>
+    `;
+  } finally {
+    submitBtn.disabled = false;
+    submitText.textContent = 'Send Message';
+    submitSpinner.classList.add('d-none');
+  }
+});

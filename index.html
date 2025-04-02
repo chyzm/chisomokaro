@@ -15,6 +15,7 @@
     <meta property="og:description" content="Check out my portfolio showcasing web development projects using Django, Bootstrap, and JavaScript.">
     <meta property="og:image" content="ChisomOkaro.vercel.app/preview.jpg">
     <meta property="og:url" content="https://chisomokaro.vercel.app">
+    <link rel="icon" href="assets/img/favicon.webp" type="image/x-icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -295,25 +296,37 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <form class="contact-form p-4 bg-white rounded shadow-sm">
+                    <form id="contactForm" class="contact-form p-4 bg-white rounded shadow-sm" novalidate>
                         <div class="mb-3">
-                            <label for="name" class="form-label">Your Name</label>
-                            <input type="text" class="form-control" id="name" required>
+                          <label for="name" class="form-label">Your Name</label>
+                          <input type="text" class="form-control" name="name" id="name" required>
+                          <div class="invalid-feedback">Please provide your name</div>
                         </div>
+                        
                         <div class="mb-3">
-                            <label for="email" class="form-label">Your Email</label>
-                            <input type="email" class="form-control" id="email" required>
+                          <label for="email" class="form-label">Your Email</label>
+                          <input type="email" class="form-control" name="email" id="email" required>
+                          <div class="invalid-feedback">Please provide a valid email</div>
                         </div>
+                        
                         <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" required>
+                          <label for="subject" class="form-label">Subject</label>
+                          <input type="text" class="form-control" name="subject" id="subject">
                         </div>
+                        
                         <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                          <label for="message" class="form-label">Message</label>
+                          <textarea class="form-control" name="message" id="message" rows="4" required></textarea>
+                          <div class="invalid-feedback">Please enter your message</div>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
-                    </form>
+                        
+                        <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+                          <span id="submitText">Send Message</span>
+                          <span id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                        </button>
+                        
+                        <div id="formAlert" class="mt-3"></div>
+                      </form>
                 </div>
             </div>
         </div>
