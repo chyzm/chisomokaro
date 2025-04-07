@@ -399,6 +399,9 @@
                           <textarea class="form-control" name="message" id="message" rows="4" required></textarea>
                           <div class="invalid-feedback">Please enter your message</div>
                         </div>
+
+                        <!-- Google reCAPTCHA widget -->
+                        <div class="g-recaptcha" data-sitekey="6Le9aQ0rAAAAACJUKHSqO4NvMtCtLauMfWxU6Q5v"></div>
                         
                         <button type="submit" class="btn btn-primary w-100" id="submitBtn">
                           <span id="submitText">Send Message</span>
@@ -407,6 +410,8 @@
                         
                         <div id="formAlert" class="mt-3"></div>
                       </form>
+                      <!-- Load reCAPTCHA script -->
+                      <script src="https://www.google.com/recaptcha/api.js" async defer></script>
                 </div>
             </div>
         </div>
