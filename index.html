@@ -429,7 +429,7 @@
             document.getElementById("num1").textContent = num1;
             document.getElementById("num2").textContent = num2;
         
-            document.getElementById("captchaForm").addEventListener("submit", function(e) {
+            document.getElementById("contactForm").addEventListener("submit", function(e) {
                 let answer = parseInt(document.getElementById("captcha").value);
                 if (answer !== num1 + num2) {
                     e.preventDefault();
